@@ -1,0 +1,52 @@
+clc
+clear
+fprintf(2,'Universidad de las Fuerzas Armadas ESPE ');
+fprintf('\nTransferencia de Masa');
+
+%Ingreso de valores
+QKW = input('\nIngrese el valor de Q(kw): ');
+QW = input('\nIngrese el valor de Q(w): ');
+clc
+fprintf(2,'\nIngrese el valor de TW(C):');
+TWC = input('\n(TW(C))-->: ');
+Dcm = input('\nIngrese el valor de D(cm): ');
+Dm = input('\nIngrese el valor de D(m): ');
+NAcm= input('\nIngrese el valor del nivel de agua (cm): ');
+NAm= input('\nIngrese el valor del nivel de agua (m): ');
+dA= input('\nIngrese el valor de densidad(g/cm3): ');
+mW= input('\nIngrese el valor mW(kg): ');
+CpW= input('\nIngrese el valor de CpW (KJ/kgC): ');
+CpWJ= input('\nIngrese el valor de CpW (J/kgC): ');
+
+A= input('\nIngrese el valor de A: ');
+B= input('\nIngrese el valor de B: ');
+C= input('\nIngrese el valor de C: ');
+
+TWO= input('\nIngrese el valor de TW0(C): ');
+Tsat= input('\nIngrese el valor de Tsaturación (C): ');
+varT= input('\nIngrese la variación de tiempo: ');
+varTWO= input('\nIngrese la variación de TW(C): ');
+
+limite=100;
+%tiempo
+%Calculo de TW
+TWOAjustada=TWO:varTWO:limite
+n=0;
+%medidor de vector
+for TWOn=TWO:varTWO:limite;
+        n=1+n;
+end
+
+%Ajuste del tiempo
+tiempo=0:varT:5000000;
+tiempo(1:n);
+
+TWONew=TWOAjustada*varTWO
+
+
+plot(tiempo(1:n), TWOAjustada,tiempo(1:n), TWONew)
+grid on
+xlabel('Tiempo')
+ylabel('TW and TWnew');
+title('Tiempo vs TW and TWnew')
+legend('TW','TWnew')
